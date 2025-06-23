@@ -100,7 +100,6 @@ def connect_to_kafka(spark_conn):
 
 def create_cassandra_connection():
     try:
-        # connecting to the cassandra cluster
         cluster = Cluster(['localhost'])
 
         cas_session = cluster.connect()
@@ -134,11 +133,9 @@ def create_selection_df_from_kafka(spark_df):
 
 
 if __name__ == "__main__":
-    # create spark connection
     spark_conn = create_spark_connection()
 
     if spark_conn is not None:
-        # connect to kafka with spark connection
         spark_df = connect_to_kafka(spark_conn)
         selection_df = create_selection_df_from_kafka(spark_df)
         session = create_cassandra_connection()
